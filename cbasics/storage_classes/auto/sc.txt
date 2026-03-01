@@ -1,0 +1,533 @@
+
+
+Skip to content
+Using Gmail with screen readers
+
+Conversations
+62% of 15 GB used
+Terms · Privacy · Programme Policies
+Last account activity: 10 hours ago
+Details
+STORAGE CLASSES:
+
+storage is known as memory.
+in memory we have the stack, heap,data,text.
+
+storage classes give the information about the variables...
+
+
+in the storage clasess we have the major 4 parts:
+1.life time 
+2.place at storage 
+3.default values
+4.scope :==>in which area the "variable" particularly placed or extendabulity of variables.
+*********************************************************************************************************************************************
+  In the storage clases we have 4 keywords
+  
+1.AUTO
+2.EXTERNAL
+3.STATIC
+4.REGISTER
+
+**********************************************************************************************************************************************
+#SCOPE#
+SCOPE:-
+1.area of the program in which identifier is recangined/remanided by the complier.
+
+
+eg:-
+#include<stdio.h>
+int x=10;
+
+int main()
+{
+    printf("%d\n",x);
+	int x=4;
+	printf("%d\n",x);
+	fun();
+}
+int fun()
+{
+	printf("%d\n",x);
+
+}
+$gcc scope.c
+scope.c: In function ‘main’:
+scope.c:18:9: warning: implicit declaration of function ‘fun’ [-Wimplicit-function-declaration]
+   18 |         fun();
+      |         ^~~
+
+./a.out
+
+10
+4
+10
+*********************************************************************************************************************************************
+#AUTO#
+1.all the variables inside a block without any storage classes specified are automatic variables.
+
+2.It was not declear to specified by the variables.
+3.it was taking by the automatically.
+4.we may also use the keyword auto to decleare automatic variable.
+   
+   
+   EX1.C                                                                     
+  
+  #include<stdio.h>                                                         
+int x=10;
+
+int main()
+{
+  printf("%d\n",x);
+  int x=4;
+  printf("%d\n",x);
+  x=100;
+  fun();
+}
+int fun()
+{
+	printf("%d\n",x);
+}
+EX1_1.C
+#include<stdio.h>
+int x;
+int fun()
+{
+	printf("%d\n",x);
+}
+int fun3()
+{
+
+}
+
+$gcc ex1.c ex1_1.c
+eg1.c: In function ‘main’:
+eg1.c:19:3: warning: implicit declaration of function ‘fun’ [-Wimplicit-function-declaration]
+   19 |   fun();
+output:
+10
+4
+10
+******************************************************************
+
+#AUTO EG2#
+1.all the variables inside a block without any storage classes specified are automatic variables.
+
+2.It was not declear to specified by the variables.
+3.it was taking by the automatically.
+4.we may also use the keyword auto to decleare automatic variable.
+  eg2.c
+  #include<stdio.h>
+int x=10;
+
+int main()
+{
+     printf("%d\n",x);
+	 int x=4;
+	 printf("%d\n",x);
+	 x=100;
+	 fun();
+	 printf("%d\n",x);
+}
+int fun()
+{
+	printf("%d\n",x);
+}
+eg2_1.c
+#include<stdio.h>
+int x;
+int fun()
+{
+	printf("%d\n",x);
+}
+int fun3()
+{
+
+}
+$gcc ex2.c ex2_1.c
+eg2.c: In function ‘main’:
+eg2.c:19:10: warning: implicit declaration of function ‘fun’ [-Wimplicit-function-declaration]
+   19 |          fun();
+      |          ^~~
+output:-
+10
+4
+10
+100
+ *****************************************
+ #ex3.c#
+#include<stdio.h>
+ int main()
+ {
+	 printf("%d\n",x);
+     int x=4;
+	 printf("%d\n",x);
+	 x=100;
+	 fun();
+	 print("%d\n",x);
+	 }
+	 int fun()
+	 {
+		 printf("%d\n",x);
+		 }
+  ex3_1.c
+  intfun2()
+  {
+	  printf("%d\n",x);
+	  }
+	  int fun3()
+	  {
+		  }
+  gcc ex3.c ex3_1.c
+  ex3.c: In function ‘main’:
+ex3.c:18:6: warning: implicit declaration of function ‘fun’ [-Wimplicit-function-declaration]
+   18 |      fun();
+      |      ^~~
+output:-
+./a.out
+10
+4
+10
+100
+
+
+**********************************************************************************************************************************************
+#EXTERN#
+1.it was default the global variable on storge classes.
+2.the data is placed on the storage of the variables.
+3.the default value was been in zero,and scope of the storge is end of file.
+4.the extern of the consider the global default was till end of the program.
+
+ex1.c
+#include<stdio.h>
+int x;
+int main()
+{
+ extern int x;
+ printf("%d %p\n",x,&x);
+ fun();
+ fun();
+ printf("%d %p\n",x,&x);
+}
+int x;
+int fun()
+{
+	x++;
+	printf("%d %p",x,&x);
+}
+
+eg1_1.c
+#include<stdio.h>
+int fun1()
+{
+	extern int x;
+	x++;
+	printf("%d %p\n",x,&x);
+}
+
+$gcc ex1.c ex1_1.c
+
+ex1.c: In function ‘main’:
+ex1.c:16:2: warning: implicit declaration of function ‘fun’ [-Wimplicit-function-declaration]
+   16 |  fun();
+      |  ^~~
+
+output:-
+./a.out
+0 0x63a453c26014
+1 0x63a453c260142 
+1 0x63a453c260142 
+2 0x63a453c26014
+
+**********************************************************************************************************************************************
+#STATIC#
+1.they are classified by two type:
+1.local static 
+2.global static
+1.LOCAL STATIC:-
+1.when the storge specifier is applied to varible declared inside the blocks,their storage class changes form automatic to ststic.
+2.a static variable is created at the complilation time and it remains alive the end of a program.
+3.it is not initialized each time the function.
+4.if a static variable is not explicily intialized by default it takes intial value is zero.
+
+ex1.c
+#include<stdio.h>
+/*static int x;
+//static int fun()
+{
+	x++;
+}*/
+int main()
+{
+	static int x;
+	printf("main:%d%p\n",x,&x);
+	fun();
+	fun();
+	printf("main:%d%p\n",x,&x);
+}
+static int x;
+int fun()
+{
+	x++;
+	printf("fun:%d%p\n",x,&x);
+}
+
+ex1_1.c
+#include<stdio.h>
+
+static int x;
+int fun1()
+{
+	x++;
+	printf("fun1:%d%p\n,x,&x");
+}
+
+
+$gcc ex1.c ex1_1.c
+
+ex1.c: In function ‘main’:
+ex1.c:20:9: warning: implicit declaration of function ‘fun’ [-Wimplicit-function
+-declaration]
+   20 |         fun();
+      |         ^~~
+output:-
+main:00x571bc4fd6018
+fun:10x571bc4fd6014
+fun:20x571bc4fd6014
+main:00x571bc4fd6018
+*****************************************************************
+2.GLOBAL STATIC
+1.if a local variable is declear as statics then it remains alive throughout the program.
+2.here the static specifier is used for information hiding.
+3.so we can make an external variable private to a file by making it static.
+  
+  ex1.c
+  #include<stdio.h>
+static int x;
+static int fun()
+{
+	x++;
+}
+int main()
+{
+	//static int x;
+	printf("main:%d%p\n",x,&x);
+	fun();
+	fun();
+	printf("main:%d%p\n",x,&x);
+}
+/*static int x;
+int fun()
+{
+	x++;
+	printf("fun:%d%p\n",x,&x);
+}*/
+
+ex1_1.c
+
+#include<stdio.h>
+
+static int x;
+int fun1()
+{
+	x++;
+	printf("fun1:%d%p\n,x,&x");
+}
+
+$gcc ex1.c
+km@km:~/KM_GITLAB/km60beai25/C_BASICS/classroom_eg/storage_cls/static$ gcc ex1.c
+km@km:~/KM_GITLAB/km60beai25/C_BASICS/classroom_eg/storage_cls/static$ 
+output:-
+main:00x5aadab989014
+main:20x5aadab989014
+**************************************************
+#ex2.c
+#include<stdio.h>
+/*static int x;
+static int fun()
+{
+	x++;
+}*\
+int main()
+{
+	static int x;
+	printf("main:%d%p\n",x,&x);
+	fun();
+	fun();
+	printf("main:%d%p\n",x,&x);
+}
+static int x;
+int fun()
+{
+	x++;
+	printf("fun:%d%p\n",x,&x);
+}
+ex2_1.c
+
+#include<stdio.h>
+
+static int x;
+int fun1()
+{
+	x++;
+	printf("fun1:%d%p\n,x,&x");
+}
+
+$gcc ex1.c
+km@km:~/KM_GITLAB/km60beai25/C_BASICS/classroom_eg/storage_cls/static$ gcc ex1.c
+km@km:~/KM_GITLAB/km60beai25/C_BASICS/classroom_eg/storage_cls/static$ 
+output:-
+main:00x5aadab989014
+main:20x5aadab989014
+*********************************************************************************************************************************************
+#REGISTER#
+
+1.the register is store the variable in the cpu regiester
+2.it always present in the in side the local variables or inside the blocks.
+3.it present in the till end of the function
+4.it can store the tempararoy values in the on chip register
+5.it does not give the exact adderes of the of the variables
+
+ex1.c
+
+#include<stdio.h>
+int x=7;
+int main()
+{
+	x=5;
+	printf("%d,%p\n",x);
+	register int x=3;
+	printf("%d,%p\n",x);
+	fun();
+	printf("%d,%p\n",x);
+}
+int fun()
+{
+printf("%d,%p\n",x);
+
+  
+}
+
+
+
+5,0x7ffe861e1878
+3,(nil)
+5,(nil)
+3,(nil)
+
+
+ex1_1.c
+
+#include<stdio.h>
+int x=7;
+int main()
+{
+	x=5;
+	printf("%d\n",x);
+	register int x=3;
+	printf("%d\n",x);
+	fun();
+	printf("%d\n",x);
+}
+int fun()
+{
+printf("%d\n",x);
+
+  
+}
+
+
+out put:
+
+5
+3
+5
+3
+STORAGE CLASSES.txt
+Displaying STORAGE CLASSES.txt.
+#include<stdio.h>
+  int x;
+
+int main()
+ 
+{
+	printf("%d\n%d\n",x,&x);
+	return 0;
+} 
+
+o/p: 0
+     garbage
+
+	 #include<stdio.h>
+func();
+int x;
+int main()
+ 
+{
+	
+	x=2;
+	printf("%d\n%d\n",x,&x);
+	func();
+	
+		printf("%d\n%d\n",x,&x);
+
+	return 0;
+
+}
+func ()
+{
+	x++;
+	printf("func:%d\n%d\n",x,&x);
+
+}
+o/p:
+2
+2032893972
+func:3
+2032893972
+3
+2032893972
+
+#include<stdio.h>
+int func();
+int func1();
+int x=1;
+int main() 
+{
+ 
+		printf("%d\n%p\n",x,&x);
+	x=2;
+	printf("%d\n%p\n",x,&x);
+	func();
+	func1();
+		printf("%d\n%p\n",x,&x);
+
+	return 0;
+
+}
+
+func ()
+{
+	x++;
+	printf("func:%d\n%p\n",x,&x);
+
+}
+
+
+
+
+o/p;
+1
+0x56241
+2
+0x56241
+fun3:3
+0x5641
+4 0x 52211
+0x5641
+
+
+
+
+
+
